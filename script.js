@@ -31,16 +31,22 @@ get.addEventListener("click", function () {
 
 function generatePassword() {
   var pwLength = prompt("How many characters would you like? (Choose between 8-128)");
+  if (!pwLength) {
+    pwLength = alert('Please enter a valid number');
+    generatePassword();
+    return false;
+  }
   //check input is a valid number
   if ( isNaN(pwLength) ) {
     pwLength = alert('Please enter a valid number');
     generatePassword();
     return false;
   }
+ 
   //convert input to number
   var parseLength = parseInt(pwLength);
   //make sure number is between 8 and 128
-  if (parseLength < 8 || parseLength > 128) {
+  if (parseLength < 8 || parseLength > 128 || false) {
     alert("Please choose a number between 8 and 128");
     generatePassword();
     return false;
@@ -140,4 +146,13 @@ function writePassword(ps) {
   document.getElementById("password").textContent = ps;
 
 }
+
 }());
+
+function copyPassword() {
+  var copyText = document.getElementById("password");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy");
+  alert("Copied the text: " + copyText.value);
+}
