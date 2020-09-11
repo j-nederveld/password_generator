@@ -1,3 +1,5 @@
+(function() {
+
 // characters
 var chars = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", "\:", "\;", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"];
 // numbers
@@ -17,17 +19,27 @@ var confirmLowercase;
 //empty variable which will be updated depending on what selections user makes
 var selections;
 
+
 function generatePassword() {
   var pwLength = prompt("How many characters would you like? (Choose between 8-128)");
   //check input is a valid number
   if ( isNaN(pwLength) ) {
-    pwLength = prompt('Please enter a valid number');
+    pwLength = alert('Please enter a valid number');
+    generatePassword();
   }
-  parseLength = parseInt(pwLength);
+  //convert input to number
+  var parseLength = parseInt(pwLength);
+  //make sure number is between 8 and 128
   if (parseLength < 8 || parseLength > 128) {
     alert("Please choose a number between 8 and 128");
     generatePassword();
   }
+  //confirm criteria (uppercase, lowercase, numbers, characters)
+  var confirmUpper = confirm("Would you like to include uppercase letters?");
+  var confirmLower = confirm("Would you like to include lowercase letters?");
+  var confirmNum = confirm("Would you like to include numbers?");
+  var confirmChars = confirm("Would you like to include special characters?");
+  
 }
 
 
@@ -68,3 +80,5 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+}());
