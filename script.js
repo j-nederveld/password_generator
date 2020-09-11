@@ -23,7 +23,7 @@ var selections;
 
 
 function generatePassword() {
-  var pwLength = prompt("How many characters would you like? (Choose between 8-128)");
+  var pwLength = prompt("How many characters would you like? (Choose a number from 8-128)");
   if (!pwLength) {
     pwLength = alert('Please enter a valid number');
     return false;
@@ -39,7 +39,7 @@ function generatePassword() {
   var parseLength = parseInt(pwLength);
   //make sure number is between 8 and 128
   if (parseLength < 8 || parseLength > 128 || false) {
-    alert("Please choose a number between 8 and 128");
+    alert("Please choose a number from 8 and 128");
     generatePassword();
     return false;
   }
@@ -155,7 +155,7 @@ function copy() {
   var copyText = document.querySelector("#password");
   copyText.select();
   document.execCommand("copy");
-  alert("copied to clipboard!");
+  alert("Copied to clipboard!");
 }
 
 document.querySelector("#copy").addEventListener("click", copy);
