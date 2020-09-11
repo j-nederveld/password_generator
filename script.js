@@ -148,7 +148,7 @@ function writePassword(ps) {
 }
 
 }());
-
+//allow user to copy generated password to their clipboard
 function copyPassword() {
   var copyText = document.getElementById("password");
   copyText.select();
