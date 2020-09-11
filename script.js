@@ -148,8 +148,6 @@ get.addEventListener("click", function () {
 
 }());
 
-
-
 //allow user to copy generated password to their clipboard (found on mozilla dev site, I added the alert)
 function copy() {
   var copyText = document.querySelector("#password");
