@@ -10,7 +10,7 @@ var lower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n
 var upper = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
 //variables to confirm selections
-var enter;
+var parseLength;
 var confirmNum;
 var confirmChars;
 var confirmUpper;
@@ -18,6 +18,15 @@ var confirmLowercase;
 
 //empty variable which will be updated depending on what selections user makes
 var selections;
+
+
+//run generate password when button is pressed
+var get = document.querySelector("#generate");
+get.addEventListener("click", function () {
+    ps = generatePassword();
+    //update page with password value after function finishes running
+    document.getElementById("password").placeholder = ps;
+});
 
 
 function generatePassword() {
@@ -42,48 +51,93 @@ function generatePassword() {
   var confirmNum = confirm("Would you like to include numbers?");
   var confirmChars = confirm("Would you like to include special characters?");
   
+  //if user selects no options
+  if (!confirmUpper && !confirmLower && !confirmNum && !confirmChars) {
+    alert("You have to choose at least one criteria!");
+    generatePassword();
+    return false;
+  }
+  //if user selects all available options
   if (confirmUpper && confirmLower && confirmNum && confirmChars) {
     selections = chars.concat(number, upper, lower);
   }
+  /***** 3/4 *****/
+  //if user selects uppercase, lowercase, and numbers
+  else if (confirmUpper && confirmLower && confirmNum) {
+    selections = number.concat(upper, lower);
+  }
+  //if user selects uppercase, lowercase, and characters
+  else if (confirmUpper && confirmLower && confirmChars) {
+    selections = chars.concat(upper, lower);
+  }
+  //if user selects uppercase, numbers, and characters
+  else if (confirmUpper && confirmNum && confirmChars) {
+    selections = chars.concat(number, upper);
+  }
+  //if user selects lowercase, numbers, and characters
+  else if (confirmLower && confirmNum && confirmChars) {
+    selections = chars.concat(number, lower);
+  }
+  /***** 2/4 *****/
+  //if user selects uppercase and lowercase
+  else if (confirmUpper && confirmLower) {
+    selections = upper.concat(lower);
+  }
+  //if user selects uppercase and numbers
+  else if (confirmUpper && confirmNum) {
+    selections = number.concat(upper);
+  }
+  //if user selects uppercase and characters
+  else if (confirmUpper && confirmChars) {
+    selections = chars.concat(upper);
+  }
+  //if user selects lowercase and numbers
+  else if (confirmLower && confirmNum) {
+    selections = number.concat(lower);
+  }
+  //if user selects lowercase and characters
+  else if (confirmLower && confirmChars) {
+    selections = chars.concat(lower);
+  }
+  //if user selects numbers and characters
+  else if (confirmNum && confirmChars) {
+    selections = chars.concat(number);
+  }
+  /***** 1/4 *****/
+  //uppercase
+  else if (confirmUpper) {
+    selections = upper;
+  }
+  //lowercase
+  else if (confirmLower) {
+    selections = lower;
+  }
+  //numbers
+  else if (confirmNum) {
+    selections = number;
+  }
+  //characters
+  else if (confirmChars) {
+    selections = chars;
+  }
+  
+        //empty array which will be populated when pw is generated
+        var password = [];
+  
+        //for loop RNG
+        for (var j = 0; j < parseLength; j++) {
+            var passwordOptions = selections[Math.floor(Math.random() * selections.length)];
+            password.push(passwordOptions);
+        }
+        // convert to string
+        var ps = password.join("");
+        writePassword(ps);
+        return ps;
 }
 
-
-//password variable to add to page
-var pw = document.querySelector("#password").innerHTML = pw;
-
-//function to select random char
-function random_char() {   
-      chars[Math.floor(Math.random() * chars.length)]; 
-}
-//function for random uppercase letter
-function random_upper() {   
-    upper[Math.floor(Math.random() * upper.length)]; 
-}
-//function for random lowercase letter
-function random_lower() {  
-    lower[Math.floor(Math.random() * lower.length)]; 
-}
-//function for random number
-function random_num() { 
- 
-    number[Math.floor(Math.random() * number.length)]; 
-}
-
-
-
-// Assignment Code
-var generateBtn = document.querySelector("#generate");
-
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
+  //populate the password onto page
+function writePassword(ps) {
+  document.getElementById("password").textContent = ps;
 
 }
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
-
 }());
