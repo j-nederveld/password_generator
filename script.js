@@ -26,6 +26,7 @@ function generatePassword() {
   if ( isNaN(pwLength) ) {
     pwLength = alert('Please enter a valid number');
     generatePassword();
+    return false;
   }
   //convert input to number
   var parseLength = parseInt(pwLength);
@@ -33,6 +34,7 @@ function generatePassword() {
   if (parseLength < 8 || parseLength > 128) {
     alert("Please choose a number between 8 and 128");
     generatePassword();
+    return false;
   }
   //confirm criteria (uppercase, lowercase, numbers, characters)
   var confirmUpper = confirm("Would you like to include uppercase letters?");
@@ -40,6 +42,9 @@ function generatePassword() {
   var confirmNum = confirm("Would you like to include numbers?");
   var confirmChars = confirm("Would you like to include special characters?");
   
+  if (confirmUpper && confirmLower && confirmNum && confirmChars) {
+    selections = chars.concat(number, upper, lower);
+  }
 }
 
 
