@@ -17,6 +17,20 @@ var confirmLowercase;
 //empty variable which will be updated depending on what selections user makes
 var selections;
 
+function generatePassword() {
+  var pwLength = prompt("How many characters would you like? (Choose between 8-128)");
+  //check input is a valid number
+  if ( isNaN(pwLength) ) {
+    pwLength = prompt('Please enter a valid number');
+  }
+  parseLength = parseInt(pwLength);
+  if (parseLength < 8 || parseLength > 128) {
+    alert("Please choose a number between 8 and 128");
+    generatePassword();
+  }
+}
+
+
 //password variable to add to page
 var pw = document.querySelector("#password").innerHTML = pw;
 
@@ -37,6 +51,8 @@ function random_num() {
  
     number[Math.floor(Math.random() * number.length)]; 
 }
+
+
 
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
