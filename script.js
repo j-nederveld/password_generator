@@ -20,20 +20,12 @@ var confirmLowercase;
 var selections;
 
 
-//run generate password when button is pressed
-var get = document.querySelector("#generate");
-get.addEventListener("click", function () {
-    ps = generatePassword();
-    //update page with password value after function finishes running
-    document.getElementById("password").placeholder = ps;
-});
 
 
 function generatePassword() {
   var pwLength = prompt("How many characters would you like? (Choose between 8-128)");
   if (!pwLength) {
     pwLength = alert('Please enter a valid number');
-    generatePassword();
     return false;
   }
   //check input is a valid number
@@ -146,13 +138,24 @@ function writePassword(ps) {
   document.getElementById("password").textContent = ps;
 
 }
+//run generate password when button is pressed
+var get = document.querySelector("#generate");
+get.addEventListener("click", function () {
+    ps = generatePassword();
+    //update page with password value after function finishes running
+    document.getElementById("password").placeholder = ps;
+});
 
 }());
-//allow user to copy generated password to their clipboard
-function copyPassword() {
-  var copyText = document.getElementById("password");
+
+
+
+//allow user to copy generated password to their clipboard (found on mozilla dev site, I added the alert)
+function copy() {
+  var copyText = document.querySelector("#password");
   copyText.select();
-  copyText.setSelectionRange(0, 99999)
   document.execCommand("copy");
-  alert("Copied the text: " + copyText.value);
+  alert("copied to clipboard!");
 }
+
+document.querySelector("#copy").addEventListener("click", copy);
