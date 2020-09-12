@@ -14,5 +14,5 @@ Instructions:
 3. choose if you would like to use uppercase/lowercase/numbers/special characters
 4. click copy button to copy password to clipboard 
 
-![](pwgenerator.gif)
+![](https://raw.githubusercontent.com/j-nederveld/password_generator/master/pwgenerator.gif)
 
